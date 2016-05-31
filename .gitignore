@@ -45,3 +45,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+*.classpath
+*.project
+
+# Ignore Exlipse Project Specific Files
+.settings/*
+
+# Ignore Maven Target Build
+target/*
+
