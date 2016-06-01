@@ -1,16 +1,18 @@
 package com.hassan.downloader.processor;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
-import com.hassan.downloader.UniversalDownloader.Processor;
+import com.hassan.downloader.Application.Processor;
 import com.hassan.downloader.commons.AppConfig;
 import com.hassan.downloader.commons.Protocol;
 import com.hassan.downloader.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.DownloadRequest;
-import com.hassan.downloader.pojos.DownloadResponse;
+import com.hassan.downloader.pojos.AppResponse;
 
 /**
  * This class is used to handle and process the URL requests
@@ -20,12 +22,10 @@ import com.hassan.downloader.pojos.DownloadResponse;
  */
 public final class DownloadProcessor implements Processor {
 	
-	final DownloadRequest req;
-	final DownloadResponse rsp;
+	final AppResponse resp;
 	
 	private DownloadProcessor() {
-		req = new DownloadRequest();
-		rsp = new DownloadResponse();
+		resp = new AppResponse();
 	}
 	
 	public static Processor getInstance() { return new DownloadProcessor(); }
@@ -34,22 +34,17 @@ public final class DownloadProcessor implements Processor {
 		Preprocessor.getInstance().perform();
 	}
 
-	public DownloadResponse process(String[] urls) {
-		List<String> validURLs = getValidURLs(urls);
+	public AppResponse process(String[] urls) {
+		List<URL> validURLs = getValidURLs(urls);
+		List<DownloadRequest> reqs = getDownloadRequests(validURLs);
 		
-		for (String url : urls) {
-/*			if (UrlValidator.) {
-				
-			}*/
-		}
-
-		return rsp;
+		return resp;
 	}
 
-	private List<String> getValidURLs(String[] urls) {
+	private List<URL> getValidURLs(String[] urls) {
 		String[] supportedProtocols = Protocol.toStrArr(AppConfig.INSTANCE.getSupportedProtocols());
 		UrlValidator uv = new UrlValidator(supportedProtocols);
-		List<String> validURLs = null;
+		List<URL> validURLs = null;
 
 		for (String url : urls) {
 			if (uv.isValid(url)) {
@@ -57,13 +52,22 @@ public final class DownloadProcessor implements Processor {
 					validURLs = new ArrayList<>();
 				}
 
-				validURLs.add(url);
+				try {
+					validURLs.add(new URL(url));
+				} catch (MalformedURLException e) {
+					resp.addInvalidUrl(url + " : Malformed URL Exception occured. Msg: " + e.getMessage());
+				}
 			} else {
-				rsp.addInvalidUrl(url);
+				resp.addInvalidUrl(url + " : Invalid or Unsupported URL");
 			}
 		}
 
 		return validURLs;
+	}
+
+	private List<DownloadRequest> getDownloadRequests(List<URL> validURLs) {
+		List<DownloadRequest> reqs = null;
+		return reqs;
 	}
 
 	public boolean performPostprocessing() {
