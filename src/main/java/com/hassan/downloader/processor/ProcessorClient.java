@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
+import com.hassan.downloader.Application;
 import com.hassan.downloader.Application.Processor;
 import com.hassan.downloader.commons.AppConfig;
 import com.hassan.downloader.commons.Protocol;
@@ -24,9 +25,7 @@ public final class ProcessorClient implements Processor {
 	
 	final AppResponse resp;
 	
-	private ProcessorClient() {
-		resp = new AppResponse();
-	}
+	private ProcessorClient() { resp = new AppResponse(); }
 	
 	public static Processor getInstance() { return new ProcessorClient(); }
 
@@ -37,7 +36,7 @@ public final class ProcessorClient implements Processor {
 	public AppResponse process(String[] urls) {
 		List<URL> validURLs = getValidURLs(urls);
 		List<DownloadRequest> reqs = getDownloadRequests(validURLs);
-		
+
 		return resp;
 	}
 
@@ -72,5 +71,12 @@ public final class ProcessorClient implements Processor {
 
 	public boolean performPostprocessing() {
 		return false;
+	}
+
+//--- DOWNLOADER INTERFACE ---
+
+	public interface Downloader extends Runnable {
+		
+		void download(DownloadRequest req, AppResponse callbackResp);
 	}
 }
