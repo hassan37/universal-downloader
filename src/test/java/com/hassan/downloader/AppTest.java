@@ -1,4 +1,4 @@
-package com.hassan.ud;
+package com.hassan.downloader;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
