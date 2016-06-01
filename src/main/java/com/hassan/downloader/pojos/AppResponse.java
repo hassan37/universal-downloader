@@ -3,7 +3,7 @@ package com.hassan.downloader.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DownloadResponse {
+public class AppResponse {
 
 	private List<String> invalidURLs;
 
