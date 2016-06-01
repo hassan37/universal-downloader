@@ -1,6 +1,6 @@
 package com.hassan.downloader.commons;
 
-import com.hassan.downloader.http.HttpDownloaderClient;
+import com.hassan.downloader.http.HttpDownloader;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.processor.ProcessorClient.Downloader;
@@ -12,7 +12,7 @@ public enum DownloaderFactory {
 		Downloader d = null;
 		switch (req.getProtocol()) {
 		case HTTP:
-			d = HttpDownloaderClient.getInstance(req, resp);
+			d = HttpDownloader.getInstance(req, resp);
 			break;
 		case FTP:
 			break;
