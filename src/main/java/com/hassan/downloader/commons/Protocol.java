@@ -1,5 +1,7 @@
 package com.hassan.downloader.commons;
 
+import java.util.Set;
+
 public enum Protocol {
 
 	HTTP("http"),
@@ -20,4 +22,16 @@ public enum Protocol {
 
 		return prot;
 	}
+	
+	public static String[] toStrArr(Set<Protocol> protocolsSet) {
+		String[] protocolsStrArr = new String[protocolsSet.size()];
+		int i = 0;
+		for (Protocol p : protocolsSet) {
+			protocolsStrArr[i] = p.val;
+			i++;
+		}
+
+		return protocolsStrArr;
+	}
+
 }
