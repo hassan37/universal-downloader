@@ -7,12 +7,23 @@ import com.hassan.downloader.commons.RequestState;
 
 public class DownloadRequest {
 	
-	public RequestState state;
+	private RequestState state;
 	
-	private URL url;
+	private final URL url;
 	
-	private Protocol protocol;
+	private final Protocol protocol;
 	
-	
+	public DownloadRequest(final URL url) {
+		this.url = url;
+		this.protocol = Protocol.getByStr(url.getProtocol());
+		this.state = RequestState.PENDING;
+	}
 
+	public RequestState getState() { return state; }
+	public void setState(RequestState state) { this.state = state; }
+
+	public URL getUrl() { return url; }
+
+	public Protocol getProtocol() { return protocol; }
+	
 }
