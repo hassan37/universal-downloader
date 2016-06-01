@@ -8,7 +8,7 @@ import com.hassan.downloader.processor.ProcessorClient.Downloader;
 public enum DownloaderFactory {
 	INSTANCE;
 
-	public Downloader get(final DownloadRequest req, final AppResponse resp) {
+	public Downloader getDownloader(final DownloadRequest req, final AppResponse resp) {
 		Downloader d = null;
 		switch (req.getProtocol()) {
 		case HTTP:
