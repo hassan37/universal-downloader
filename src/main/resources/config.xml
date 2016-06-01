@@ -3,5 +3,6 @@
 <properties>
 
 	<entry key="supported_protocols">http,ftp</entry>
+	<entry key="concurrent_mode_enabled">Y</entry>
 
 </properties>
