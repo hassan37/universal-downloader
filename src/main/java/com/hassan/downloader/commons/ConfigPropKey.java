@@ -2,7 +2,7 @@ package com.hassan.downloader.commons;
 
 public enum ConfigPropKey {
 	
-	WELCOME_MESSAGES("welcome_messages")
+	SUPPORTED_PROTOCOLS("supported_protocols")
 	;
 
 	public final String val;
