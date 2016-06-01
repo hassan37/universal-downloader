@@ -1,4 +1,4 @@
-package com.hassan.downloader.commons;
+package com.hassan.downloader.commons.constants;
 
 public enum RequestState {
 	PENDING,

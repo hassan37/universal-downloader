@@ -1,4 +1,4 @@
-package com.hassan.downloader.commons;
+package com.hassan.downloader.commons.factories;
 
 import com.hassan.downloader.http.HttpDownloader;
 import com.hassan.downloader.pojos.AppResponse;
