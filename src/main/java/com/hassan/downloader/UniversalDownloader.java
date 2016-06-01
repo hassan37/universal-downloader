@@ -1,10 +1,6 @@
 package com.hassan.downloader;
 
-import java.io.IOException;
-
-import com.hassan.downloader.commons.AppConfig;
-import com.hassan.downloader.commons.ConfigPropKey;
-import com.hassan.downloader.pojos.DownloadRequest;
+import com.hassan.downloader.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.DownloadResponse;
 import com.hassan.downloader.processor.DownloadProcessor;
 
@@ -14,31 +10,33 @@ public class UniversalDownloader {
 	
 	public static UniversalDownloader getInstance() { return new UniversalDownloader(); }
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PreprocessingException {
 		if (args.length > 0) {
 			
 			UniversalDownloader app = getInstance();
 			
 			app.proc = DownloadProcessor.getInstance();
 			
-			app.pro
-
-			//Download
+			app.proc.performPreprocessing();
 			
-			//1. Load prerequisites 
-			if (ud.loadPrerequisites()) {
-				System.out.println(AppConfig.INSTANCE.getStrProp(ConfigPropKey.WELCOME_MESSAGES));
-			}
+			app.proc.process(args);
+			
+			app.proc.performPostprocessing();
+
 		} else {
 			System.out.println("Nothing to download. Empty list of URLs.");
 		}
 	}
 
-//--------------------------- Downloader Interface ---------
-	
+	/**
+	 * The processor responsible for processing the Download Requests
+	 * 
+	 * @author hafiz.hassan
+	 *
+	 */
 	public interface Processor {
 		
-		boolean performPreprocessing();
+		void performPreprocessing() throws PreprocessingException;
 		
 		DownloadResponse process(String[] urls);
 		
