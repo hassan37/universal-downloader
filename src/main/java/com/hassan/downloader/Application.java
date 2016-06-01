@@ -2,7 +2,7 @@ package com.hassan.downloader;
 
 import com.hassan.downloader.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.AppResponse;
-import com.hassan.downloader.processor.DownloadProcessor;
+import com.hassan.downloader.processor.ProcessorClient;
 
 public class Application {
 	
@@ -15,7 +15,7 @@ public class Application {
 			
 			Application app = getInstance();
 			
-			app.proc = DownloadProcessor.getInstance();
+			app.proc = ProcessorClient.getInstance();
 			
 			app.proc.performPreprocessing();
 			

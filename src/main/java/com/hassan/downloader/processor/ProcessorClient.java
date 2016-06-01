@@ -20,15 +20,15 @@ import com.hassan.downloader.pojos.AppResponse;
  * @author hafiz.hassan
  *
  */
-public final class DownloadProcessor implements Processor {
+public final class ProcessorClient implements Processor {
 	
 	final AppResponse resp;
 	
-	private DownloadProcessor() {
+	private ProcessorClient() {
 		resp = new AppResponse();
 	}
 	
-	public static Processor getInstance() { return new DownloadProcessor(); }
+	public static Processor getInstance() { return new ProcessorClient(); }
 
 	public void performPreprocessing() throws PreprocessingException {
 		Preprocessor.getInstance().perform();
