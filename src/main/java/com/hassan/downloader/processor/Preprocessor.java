@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.commons.collections.CollectionUtils;
 
 import com.hassan.downloader.commons.AppConfig;
-import com.hassan.downloader.exceptions.PreprocessingException;
+import com.hassan.downloader.commons.exceptions.PreprocessingException;
 
 class Preprocessor {
 	

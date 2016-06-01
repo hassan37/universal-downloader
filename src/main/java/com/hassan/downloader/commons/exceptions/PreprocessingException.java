@@ -1,4 +1,4 @@
-package com.hassan.downloader.exceptions;
+package com.hassan.downloader.commons.exceptions;
 
 public class PreprocessingException extends Exception {
 	

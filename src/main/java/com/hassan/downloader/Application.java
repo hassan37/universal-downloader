@@ -1,6 +1,6 @@
 package com.hassan.downloader;
 
-import com.hassan.downloader.exceptions.PreprocessingException;
+import com.hassan.downloader.commons.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.processor.ProcessorClient;
 
