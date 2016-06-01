@@ -1,19 +1,19 @@
 package com.hassan.downloader;
 
 import com.hassan.downloader.exceptions.PreprocessingException;
-import com.hassan.downloader.pojos.DownloadResponse;
+import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.processor.DownloadProcessor;
 
-public class UniversalDownloader {
+public class Application {
 	
 	public Processor proc;
 	
-	public static UniversalDownloader getInstance() { return new UniversalDownloader(); }
+	public static Application getInstance() { return new Application(); }
 	
 	public static void main(String[] args) throws PreprocessingException {
 		if (args.length > 0) {
 			
-			UniversalDownloader app = getInstance();
+			Application app = getInstance();
 			
 			app.proc = DownloadProcessor.getInstance();
 			
@@ -38,7 +38,7 @@ public class UniversalDownloader {
 		
 		void performPreprocessing() throws PreprocessingException;
 		
-		DownloadResponse process(String[] urls);
+		AppResponse process(String[] urls);
 		
 		boolean performPostprocessing();
 	}
