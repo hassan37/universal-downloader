@@ -5,12 +5,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
 import com.hassan.downloader.Application.Processor;
 import com.hassan.downloader.commons.AppConfig;
 import com.hassan.downloader.commons.Protocol;
+import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.exceptions.PreprocessingException;
 import com.hassan.downloader.commons.factories.DownloaderFactory;
 import com.hassan.downloader.pojos.AppResponse;
@@ -80,17 +82,21 @@ public final class ProcessorClient implements Processor {
 	}
 
 	private void processRequests(List<DownloadRequest> reqs) {
-		initExecutorService();
+		initExecutorService(reqs.size());
 		for (DownloadRequest req : reqs) {
 			Downloader d = DownloaderFactory.INSTANCE.getDownloader(req, resp);
+			executor.submit(d);
 		}		
 	}
 
-//-------------------------------------------------------------------------------- Post Processing
+	private void initExecutorService(int reqsCount) {
+		Integer maxThreadsCount = AppConfig.INSTANCE.getIntProp(ConfigPropKey.MAX_THREADS);
+		int threadsCount = Math.min(reqsCount, null == maxThreadsCount ? 0 : maxThreadsCount);
 
-	private void initExecutorService() {
-		
+		executor = Executors.newFixedThreadPool(threadsCount);
 	}
+
+//-------------------------------------------------------------------------------- Post Processing
 
 	public boolean performPostprocessing() {
 		return false;

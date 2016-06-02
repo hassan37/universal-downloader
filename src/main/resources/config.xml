@@ -3,6 +3,6 @@
 <properties>
 
 	<entry key="supported_protocols">http,ftp</entry>
-	<entry key="concurrent_mode_enabled">Y</entry>
+	<entry key="max_threads">10</entry>
 
 </properties>

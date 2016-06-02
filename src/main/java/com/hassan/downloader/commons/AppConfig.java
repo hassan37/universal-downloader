@@ -43,6 +43,17 @@ public enum AppConfig {
 		return CONFIG_PROPS.getProperty(key.val);
 	}
 	
+	public Integer getIntProp(ConfigPropKey key) {
+		Integer intProp = null;
+		try {
+			intProp = Integer.parseInt(CONFIG_PROPS.getProperty(key.val));
+		} catch (Exception e) {
+			System.out.println("Exception occured in interger conversion due to: " + e.getMessage());
+		}
+
+		return intProp;
+	}
+	
 	public String[] getListProp(ConfigPropKey key, ListSeparator listSeparator) {
 		String[] strArr = null;
 		String str = CONFIG_PROPS.getProperty(key.val);

@@ -7,12 +7,9 @@ import com.hassan.downloader.processor.ProcessorClient.Downloader;
 public class HttpDownloader implements Downloader {
 
 	final DownloadRequest req;
-
 	final AppResponse resp;
 	
-	public static Downloader getInstance(final DownloadRequest req, final AppResponse resp) {
-		return new HttpDownloader(req, resp);
-	}
+	public static Downloader getInstance(DownloadRequest req, AppResponse resp) { return new HttpDownloader(req, resp); }
 
 	private HttpDownloader(final DownloadRequest req, final AppResponse resp) {
 		this.req = req;
@@ -20,15 +17,11 @@ public class HttpDownloader implements Downloader {
 	}
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-	}
+	public void run() { download(req, resp); }
 
 	@Override
-	public void download(DownloadRequest req, AppResponse callbackResp) {
-		// TODO Auto-generated method stub
-
+	public void download(final DownloadRequest req, final AppResponse callbackResp) {
+		
 	}
 
 }
