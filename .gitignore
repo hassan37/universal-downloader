@@ -48,11 +48,13 @@ Temporary Items
 
 *.classpath
 *.project
+*.iml
 
 # Ignore Exlipse Project Specific Files
-.settings/*
+/.settings/
 
 # Ignore Maven Target Build
-target/*
-
 /target/
+
+# Ignore IntelliJ Idea Folders
+/.idea/
