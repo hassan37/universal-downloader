@@ -1,5 +1,16 @@
 package com.hassan.downloader.processor;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.validator.routines.UrlValidator;
+
 import com.hassan.downloader.Application.Processor;
 import com.hassan.downloader.commons.AppConfig;
 import com.hassan.downloader.commons.builders.DownloadRequestBuilder;
@@ -10,17 +21,7 @@ import com.hassan.downloader.commons.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.pojos.OutputFile;
-import com.hassan.downloader.protocols.DownloaderFactory;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.validator.routines.UrlValidator;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.hassan.downloader.protocols.Downloaders;
 
 /**
  * This class is used to handle and process the URL requests
@@ -31,7 +32,7 @@ import java.util.concurrent.Executors;
 public final class ProcessorClient implements Processor {
 
 	final AppResponse resp;
-	
+
 	ExecutorService executor;
 
 	private ProcessorClient() { resp = new AppResponse(); }
@@ -101,9 +102,14 @@ public final class ProcessorClient implements Processor {
 	private void processRequests(List<DownloadRequest> reqs) {
 		initExecutorService(reqs.size());
 		for (DownloadRequest req : reqs) {
-			Downloader d = DownloaderFactory.INSTANCE.getDownloader(req, resp);
+			Downloader d = Downloaders.INSTANCE.getDownloader(req, resp);
 			executor.submit(d);
-		}		
+		}
+		
+		shutDownExecutor(
+				AppConfig.INSTANCE.getIntProp(ConfigPropKey.EXECUTOR_TIMEOUT_VALUE),
+				AppConfig.INSTANCE.getTimeUnitProp(ConfigPropKey.EXECUTOR_TIMEOUT_UNIT)
+		);
 	}
 
 	private void initExecutorService(int reqsCount) {
@@ -111,6 +117,20 @@ public final class ProcessorClient implements Processor {
 		int threadsCount = Math.min(reqsCount, null == maxThreadsCount ? 0 : maxThreadsCount);
 
 		executor = Executors.newFixedThreadPool(threadsCount);
+	}
+
+	public void shutDownExecutor(long timeOut, TimeUnit timeUnit) {
+
+		if (null != executor && !executor.isShutdown()) {
+			executor.shutdown();
+			try {
+				executor.awaitTermination(timeOut, timeUnit);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				executor = null;
+			}
+		}
 	}
 
 //-------------------------------------------------------------------------------- Post Processing
@@ -128,7 +148,7 @@ public final class ProcessorClient implements Processor {
 	 *
 	 */
 	public interface Downloader extends Runnable {
-	
+
 		void download(DownloadRequest req, AppResponse callbackResp);
 	}
 
