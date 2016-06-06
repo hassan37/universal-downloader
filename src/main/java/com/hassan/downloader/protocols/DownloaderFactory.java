@@ -1,9 +1,8 @@
-package com.hassan.downloader.commons.factories;
+package com.hassan.downloader.protocols;
 
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.processor.ProcessorClient.Downloader;
-import com.hassan.downloader.protocols.HttpDownloader;
 
 public enum DownloaderFactory {
 	INSTANCE;
@@ -15,6 +14,7 @@ public enum DownloaderFactory {
 			d = HttpDownloader.getInstance(req, resp);
 			break;
 		case FTP:
+			d = FtpDownloader.getInstance(req, resp);
 			break;
 		case UNSUPPORTED:
 			break;

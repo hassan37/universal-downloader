@@ -4,18 +4,15 @@ import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.processor.ProcessorClient.Downloader;
 
-public abstract class DefDownloader implements Downloader {
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
+abstract class DefDownloader implements Downloader {
+	
+	final DownloadRequest req;
+	final AppResponse resp;
+	
+	DefDownloader(final DownloadRequest req, final AppResponse resp) {
+		this.req = req;
+		this.resp = resp;
 	}
 
-	@Override
-	public void download(DownloadRequest req, AppResponse callbackResp) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

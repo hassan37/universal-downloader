@@ -4,7 +4,11 @@ import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.processor.ProcessorClient.Downloader;
 
-public class FtpDownloader implements Downloader {
+class FtpDownloader extends DefDownloader {
+
+	public static Downloader getInstance(DownloadRequest req, AppResponse resp) { return new FtpDownloader(req, resp); }
+
+	private FtpDownloader(final DownloadRequest req, final AppResponse resp) { super(req, resp); }
 
 	@Override
 	public void run() {

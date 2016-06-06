@@ -7,10 +7,11 @@ import com.hassan.downloader.commons.builders.DownloadRequestBuilder;
 import com.hassan.downloader.commons.builders.OutputFileBuilder;
 import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.exceptions.PreprocessingException;
-import com.hassan.downloader.commons.factories.DownloaderFactory;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.pojos.OutputFile;
+import com.hassan.downloader.protocols.DownloaderFactory;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 

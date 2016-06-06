@@ -9,17 +9,11 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-public class HttpDownloader implements Downloader {
+class HttpDownloader extends DefDownloader {
 
-	final DownloadRequest req;
-	final AppResponse resp;
-	
 	public static Downloader getInstance(DownloadRequest req, AppResponse resp) { return new HttpDownloader(req, resp); }
 
-	private HttpDownloader(final DownloadRequest req, final AppResponse resp) {
-		this.req = req;
-		this.resp = resp;
-	}
+	private HttpDownloader(final DownloadRequest req, final AppResponse resp) { super(req, resp); }
 
 	@Override
 	public void run() { download(req, resp); }
