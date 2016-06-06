@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.constants.Constants;
+import com.hassan.downloader.commons.constants.Protocol;
 import com.hassan.downloader.commons.constants.Separator;
 
 /**

@@ -1,6 +1,6 @@
 package com.hassan.downloader.pojos;
 
-import com.hassan.downloader.commons.Protocol;
+import com.hassan.downloader.commons.constants.Protocol;
 import com.hassan.downloader.commons.constants.RequestState;
 
 import java.net.URL;

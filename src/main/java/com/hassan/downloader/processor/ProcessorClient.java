@@ -2,10 +2,10 @@ package com.hassan.downloader.processor;
 
 import com.hassan.downloader.Application.Processor;
 import com.hassan.downloader.commons.AppConfig;
-import com.hassan.downloader.commons.Protocol;
 import com.hassan.downloader.commons.builders.DownloadRequestBuilder;
 import com.hassan.downloader.commons.builders.OutputFileBuilder;
 import com.hassan.downloader.commons.constants.ConfigPropKey;
+import com.hassan.downloader.commons.constants.Protocol;
 import com.hassan.downloader.commons.exceptions.PreprocessingException;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;

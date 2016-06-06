@@ -1,4 +1,4 @@
-package com.hassan.downloader.commons;
+package com.hassan.downloader.commons.constants;
 
 import java.util.Set;
 
