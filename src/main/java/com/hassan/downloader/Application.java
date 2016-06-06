@@ -11,6 +11,10 @@ public class Application {
 	public static Application getInstance() { return new Application(); }
 	
 	public static void main(String[] args) throws PreprocessingException {
+		/*
+		 * Sample URLS:
+		 * ftp://ftp.cs.brown.edu/pub/brownsim/sim-2.0.1.tar.gz http://samplecsvs.s3.amazonaws.com/TechCrunchcontinentalUSA.csv http://spatialkeydocs.s3.amazonaws.com/FL_insurance_sample.csv.zip ftp://ftp.cs.brown.edu/pub/gnumake.tar.Z
+		 */
 		if (args.length > 0) {
 			
 			Application app = getInstance();

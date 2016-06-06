@@ -67,7 +67,7 @@ public enum AppConfig {
 		if (CollectionUtils.isEmpty(SUPPORTED_PROTOCOLS)) {
 			String[] spStrArr = getListProp(ConfigPropKey.SUPPORTED_PROTOCOLS, Separator.COMMA);
 
-			if (ArrayUtils.isEmpty(spStrArr)) {
+			if (ArrayUtils.isNotEmpty(spStrArr)) {
 				for (String sp : spStrArr) {
 					Protocol p = Protocol.getByStr(sp);
 					if (Protocol.UNSUPPORTED != p) {

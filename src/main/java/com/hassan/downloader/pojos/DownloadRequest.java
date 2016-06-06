@@ -14,6 +14,9 @@ public class DownloadRequest {
 	public final Protocol protocol;
 
 	public final OutputFile file;
+	
+	private String ftpUser;
+	private String ftpPwd;
 
 	public DownloadRequest(final URL url, final OutputFile file) {
 		this.url = url;
@@ -21,4 +24,13 @@ public class DownloadRequest {
 		this.file = file;
 		this.state = RequestState.PENDING;
 	}
+
+	public String getFtpUser() { return ftpUser; }
+
+	public void setFtpUser(String ftpUser) { this.ftpUser = ftpUser; }
+
+	public String getFtpPwd() { return ftpPwd; }
+
+	public void setFtpPwd(String ftpPwd) { this.ftpPwd = ftpPwd; }
+	
 }

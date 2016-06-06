@@ -27,7 +27,7 @@ class HttpDownloader extends DefDownloader {
 			req.state = RequestState.COMPLETED;
 		} catch (IOException e) {
 			req.state = RequestState.ERROR;
-			req.file.setError("Downloading the file is failed due to: " + e.getMessage() + "\n Error Object: " + e.toString());
+			req.file.setError("Downloading the file is failed due to: " + e.getMessage() + "\n Error Object: " + e);
 		} finally {
 			callbackResp.receive(req);
 		}
