@@ -10,7 +10,7 @@ public enum DownloaderFactory {
 
 	public Downloader getDownloader(final DownloadRequest req, final AppResponse resp) {
 		Downloader d = null;
-		switch (req.getProtocol()) {
+		switch (req.protocol) {
 		case HTTP:
 			d = HttpDownloader.getInstance(req, resp);
 			break;

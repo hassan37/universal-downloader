@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.constants.Constants;
-import com.hassan.downloader.commons.constants.ListSeparator;
+import com.hassan.downloader.commons.constants.Separator;
 
 /**
  * 
@@ -54,11 +54,11 @@ public enum AppConfig {
 		return intProp;
 	}
 	
-	public String[] getListProp(ConfigPropKey key, ListSeparator listSeparator) {
+	public String[] getListProp(ConfigPropKey key, Separator separator) {
 		String[] strArr = null;
 		String str = CONFIG_PROPS.getProperty(key.val);
-		if (StringUtils.isNotBlank(str) && str.contains(listSeparator.val)) {
-			strArr = StringUtils.split(str, listSeparator.val);
+		if (StringUtils.isNotBlank(str) && str.contains(separator.val)) {
+			strArr = StringUtils.split(str, separator.val);
 		}
 
 		return strArr;
@@ -67,7 +67,7 @@ public enum AppConfig {
 	public Set<Protocol> getSupportedProtocols() {
 		
 		if (CollectionUtils.isEmpty(supportedProtocols)) {
-			String[] spStrArr = getListProp(ConfigPropKey.SUPPORTED_PROTOCOLS, ListSeparator.COMMA);
+			String[] spStrArr = getListProp(ConfigPropKey.SUPPORTED_PROTOCOLS, Separator.COMMA);
 			
 			if (ArrayUtils.isEmpty(spStrArr)) {
 				for (String sp : spStrArr) {

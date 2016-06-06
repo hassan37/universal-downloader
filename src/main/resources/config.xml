@@ -4,5 +4,7 @@
 
 	<entry key="supported_protocols">http,ftp</entry>
 	<entry key="max_threads">10</entry>
+	<entry key="target_dir">/Users/hassan/Desktop/</entry>
+    <entry key="http_connection_timeout">10</entry>
 
 </properties>

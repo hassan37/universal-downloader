@@ -1,22 +1,25 @@
 package com.hassan.downloader.processor;
 
+import com.hassan.downloader.Application.Processor;
+import com.hassan.downloader.commons.AppConfig;
+import com.hassan.downloader.commons.Protocol;
+import com.hassan.downloader.commons.builders.DownloadRequestBuilder;
+import com.hassan.downloader.commons.builders.OutputFileBuilder;
+import com.hassan.downloader.commons.constants.ConfigPropKey;
+import com.hassan.downloader.commons.exceptions.PreprocessingException;
+import com.hassan.downloader.commons.factories.DownloaderFactory;
+import com.hassan.downloader.pojos.AppResponse;
+import com.hassan.downloader.pojos.DownloadRequest;
+import com.hassan.downloader.pojos.OutputFile;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.validator.routines.UrlValidator;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import org.apache.commons.validator.routines.UrlValidator;
-
-import com.hassan.downloader.Application.Processor;
-import com.hassan.downloader.commons.AppConfig;
-import com.hassan.downloader.commons.Protocol;
-import com.hassan.downloader.commons.constants.ConfigPropKey;
-import com.hassan.downloader.commons.exceptions.PreprocessingException;
-import com.hassan.downloader.commons.factories.DownloaderFactory;
-import com.hassan.downloader.pojos.AppResponse;
-import com.hassan.downloader.pojos.DownloadRequest;
 
 /**
  * This class is used to handle and process the URL requests
@@ -43,10 +46,14 @@ public final class ProcessorClient implements Processor {
 //-------------------------------------------------------------------------------- URLs Processing
 
 	public AppResponse process(String[] urls) {
+
+		//1. URLs Validation
 		List<URL> validURLs = getValidURLs(urls);
 
-		List<DownloadRequest> reqs = getDownloadRequests(validURLs);
+		//2. Prepare Download Requests
+		List<DownloadRequest> reqs = prepareDownloadRequests(validURLs);
 
+		//3. process each download request
 		processRequests(reqs);
 
 		return resp;
@@ -76,8 +83,17 @@ public final class ProcessorClient implements Processor {
 		return validURLs;
 	}
 
-	private List<DownloadRequest> getDownloadRequests(List<URL> validURLs) {
+	private List<DownloadRequest> prepareDownloadRequests(List<URL> urls) {
 		List<DownloadRequest> reqs = null;
+		if (CollectionUtils.isNotEmpty(urls)) {
+			reqs = new ArrayList<>();
+			for (URL u : urls) {
+				OutputFile f = OutputFileBuilder.build(u);
+				DownloadRequest req = DownloadRequestBuilder.build(u, f);
+				reqs.add(req);
+			}
+		}
+
 		return reqs;
 	}
 

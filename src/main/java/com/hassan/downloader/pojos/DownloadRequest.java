@@ -1,29 +1,24 @@
 package com.hassan.downloader.pojos;
 
-import java.net.URL;
-
 import com.hassan.downloader.commons.Protocol;
 import com.hassan.downloader.commons.constants.RequestState;
 
+import java.net.URL;
+
 public class DownloadRequest {
 	
-	private RequestState state;
+	public RequestState state;
 	
-	private final URL url;
+	public final URL url;
 	
-	private final Protocol protocol;
-	
-	public DownloadRequest(final URL url) {
+	public final Protocol protocol;
+
+	public final OutputFile file;
+
+	public DownloadRequest(final URL url, final OutputFile file) {
 		this.url = url;
 		this.protocol = Protocol.getByStr(url.getProtocol());
+		this.file = file;
 		this.state = RequestState.PENDING;
 	}
-
-	public RequestState getState() { return state; }
-	public void setState(RequestState state) { this.state = state; }
-
-	public URL getUrl() { return url; }
-
-	public Protocol getProtocol() { return protocol; }
-	
 }
