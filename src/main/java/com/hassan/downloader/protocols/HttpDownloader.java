@@ -1,4 +1,4 @@
-package com.hassan.downloader.http;
+package com.hassan.downloader.protocols;
 
 import com.hassan.downloader.commons.constants.RequestState;
 import com.hassan.downloader.pojos.AppResponse;
