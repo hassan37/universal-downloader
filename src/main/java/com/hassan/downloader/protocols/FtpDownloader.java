@@ -11,9 +11,7 @@ class FtpDownloader extends DefDownloader {
 	private FtpDownloader(final DownloadRequest req, final AppResponse resp) { super(req, resp); }
 
 	@Override
-	public void run() {
-		
-	}
+	public void run() { download(req, resp); }
 
 	@Override
 	public void download(DownloadRequest req, AppResponse callbackResp) {

@@ -4,7 +4,7 @@ import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
 import com.hassan.downloader.processor.ProcessorClient.Downloader;
 
-public enum DownloaderFactory {
+public enum Downloaders {
 	INSTANCE;
 
 	public Downloader getDownloader(final DownloadRequest req, final AppResponse resp) {
