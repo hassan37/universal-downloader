@@ -22,7 +22,7 @@ class HttpDownloader extends DefDownloader {
 	@Override
 	public void download(final DownloadRequest req, final AppResponse callbackResp) {
 		try {
-			File f = new File(req.file.path.toString());
+			File f = req.file.path.toFile();
 			req.state = RequestState.DOWNLOADING;
 			FileUtils.copyURLToFile(req.url, f);
 			req.state = RequestState.COMPLETED;

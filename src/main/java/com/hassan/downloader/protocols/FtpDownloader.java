@@ -1,18 +1,17 @@
 package com.hassan.downloader.protocols;
 
-import java.io.File;
-import java.io.IOException;
-
+import com.hassan.downloader.commons.constants.RequestState;
+import com.hassan.downloader.pojos.AppResponse;
+import com.hassan.downloader.pojos.DownloadRequest;
+import com.hassan.downloader.processor.ProcessorClient.Downloader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
-import com.hassan.downloader.commons.constants.RequestState;
-import com.hassan.downloader.pojos.AppResponse;
-import com.hassan.downloader.pojos.DownloadRequest;
-import com.hassan.downloader.processor.ProcessorClient.Downloader;
+import java.io.File;
+import java.io.IOException;
 
 class FtpDownloader extends DefDownloader {
 	
@@ -32,7 +31,7 @@ class FtpDownloader extends DefDownloader {
 	public void download(DownloadRequest req, AppResponse callbackResp) {
 		try {
 			if (initFtpClientConnection()) {
-				File f = new File(req.file.path.toString());
+				File f = req.file.path.toFile();
 				req.state = RequestState.DOWNLOADING;
 				FileUtils.copyInputStreamToFile(fc.retrieveFileStream(req.url.getPath()), f);
 				req.state = RequestState.COMPLETED;
