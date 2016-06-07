@@ -1,9 +1,7 @@
 package com.hassan.downloader.pojos;
 
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +23,9 @@ public class AppResponse {
 			System.out.println("File is downloaded successfully at: " + req.file.path.toString());
 			break;
 		case ERROR:
-			System.out.println("File is failed to download due to: " + req.file.getError());
+			System.out.println("File [" + req.file.path.getFileName().toString() + "] " + req.file.getError());
 			try {
-				FileUtils.forceDelete(new File(req.file.path.toString()));
+				Files.deleteIfExists(req.file.path);
 			} catch (IOException e) {
 				System.out.println("Exception occurred during deleting the file due to: " + e.getMessage());
 			}

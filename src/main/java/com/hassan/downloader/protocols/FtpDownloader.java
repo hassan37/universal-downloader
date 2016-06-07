@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -37,10 +38,10 @@ class FtpDownloader extends DefDownloader {
 				req.state = RequestState.COMPLETED;
 			}
 		} catch (IOException e) {
-			error("Downloading the file is failed due to: " + e.getMessage() + "\n Error Object: " + e);
+			error("Downloading the file is failed due to: " + ExceptionUtils.getRootCauseMessage(e) + "\n\tError Object: " + ExceptionUtils.getStackTrace(e));
 		} finally {
-			callbackResp.receive(req);
 			terminateFtpClientConnection();
+			callbackResp.receive(req);
 		}
 	}
 
@@ -56,7 +57,7 @@ class FtpDownloader extends DefDownloader {
 				}
 			}
 		} catch (IOException e) {
-			error("FTP Connection is failed due to: " + e.getMessage() + "\n Error Object: " + e);
+			error("FTP Connection is failed due to: " + ExceptionUtils.getRootCauseMessage(e) + "\n\tError Object: " + ExceptionUtils.getStackTrace(e));
 		}
 
 		return connected;
