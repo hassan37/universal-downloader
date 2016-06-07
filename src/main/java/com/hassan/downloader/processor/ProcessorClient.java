@@ -127,8 +127,6 @@ public final class ProcessorClient implements Processor {
 				executor.awaitTermination(timeOut, timeUnit);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			} finally {
-				executor = null;
 			}
 		}
 	}

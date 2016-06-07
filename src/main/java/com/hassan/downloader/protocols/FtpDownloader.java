@@ -52,8 +52,8 @@ class FtpDownloader extends DefDownloader {
 				if(fc.login(req.getFtpUser(), req.getFtpPwd())) {
 					fc.enterLocalPassiveMode();
 					fc.setFileType(FTP.BINARY_FILE_TYPE);
+					connected = true;
 				}
-				
 			}
 		} catch (IOException e) {
 			error("FTP Connection is failed due to: " + e.getMessage() + "\n Error Object: " + e);
@@ -69,7 +69,7 @@ class FtpDownloader extends DefDownloader {
 				fc.disconnect();
 			} catch (IOException e) {
 				System.out.println("Error occured during closing the connection due to: " + e);
-			} finally { fc = null; }
+			}
 		}
 	}
 

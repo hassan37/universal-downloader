@@ -28,10 +28,8 @@ public final class OutputFileBuilder {
 	private static String buildUniqueFileName(final URL url) {
 		String path = url.getPath();
 		int startIndex = path.lastIndexOf(Separator.FWD_SLASH.val) + 1;
-		int endIndex = path.lastIndexOf (Separator.DOT.val, path.length());
-		String fileName = path.substring(startIndex, endIndex);
-		String ext = path.substring(endIndex+1);
+		String fileName = path.substring(startIndex);
 
-		return fileName + Separator.UNDER_SCORE.val + System.currentTimeMillis() + Separator.DOT.val + ext;
+		return System.currentTimeMillis() + Separator.UNDER_SCORE.val + fileName;
 	}
 }
