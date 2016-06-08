@@ -21,8 +21,8 @@ public enum AppConfig {
 	INSTANCE,
 	;
 
-	private final Properties CONFIG_PROPS = new Properties();
-
+	public final Properties CONFIG_PROPS = new Properties();
+	
 	private final Set<Protocol> SUPPORTED_PROTOCOLS = EnumSet.noneOf(Protocol.class);
 
 	public void load() throws IOException {

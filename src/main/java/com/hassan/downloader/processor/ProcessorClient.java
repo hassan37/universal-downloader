@@ -134,7 +134,13 @@ public final class ProcessorClient implements Processor {
 //-------------------------------------------------------------------------------- Post Processing
 
 	public boolean performPostprocessing() {
-		return false;
+		List<String> invalidUrls = resp.getInvalidURLs();
+		System.out.println("Invalid URLs: ");
+		for (String u : invalidUrls) {
+			System.out.println(u);
+		}
+
+		return true;
 	}
 
 //-------------------------------------------------------------------------------- DOWNLOADER INTERFACE
