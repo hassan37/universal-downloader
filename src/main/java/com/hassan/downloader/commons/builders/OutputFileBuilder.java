@@ -1,13 +1,15 @@
 package com.hassan.downloader.commons.builders;
 
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.commons.lang3.RandomStringUtils;
+
 import com.hassan.downloader.commons.AppConfig;
 import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.constants.Separator;
 import com.hassan.downloader.pojos.OutputFile;
-
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public final class OutputFileBuilder {
 
@@ -30,6 +32,6 @@ public final class OutputFileBuilder {
 		int startIndex = path.lastIndexOf(Separator.FWD_SLASH.val) + 1;
 		String fileName = path.substring(startIndex);
 
-		return System.currentTimeMillis() + Separator.UNDER_SCORE.val + fileName;
+		return System.currentTimeMillis() + Separator.UNDER_SCORE.val + RandomStringUtils.randomAlphanumeric(3) + Separator.UNDER_SCORE.val + fileName;
 	}
 }
