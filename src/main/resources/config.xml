@@ -2,11 +2,12 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<entry key="supported_protocols">http,ftp</entry>
-	<entry key="max_threads">10</entry>
-	<entry key="target_dir">C:\Users\hafiz.hassan\Desktop/</entry>
-    <entry key="http_connection_timeout">10</entry>
-    <entry key="executor_timeout_value">6</entry>
     <entry key="executor_timeout_unit">days</entry>
+    <entry key="executor_timeout_value">6</entry>
+    <entry key="http_connection_timeout">480000</entry>
+    <entry key="http_read_timeout">480000</entry>
+	<entry key="max_threads">10</entry>
+	<entry key="supported_protocols">http,ftp</entry>
+	<entry key="target_dir">C:\Users\hafiz.hassan\Desktop\</entry>
 
 </properties>

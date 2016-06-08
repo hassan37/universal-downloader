@@ -1,5 +1,7 @@
 package com.hassan.downloader.protocols;
 
+import com.hassan.downloader.commons.AppConfig;
+import com.hassan.downloader.commons.constants.ConfigPropKey;
 import com.hassan.downloader.commons.constants.RequestState;
 import com.hassan.downloader.pojos.AppResponse;
 import com.hassan.downloader.pojos.DownloadRequest;
@@ -24,7 +26,10 @@ class HttpDownloader extends DefDownloader {
 		try {
 			File f = req.file.path.toFile();
 			req.state = RequestState.DOWNLOADING;
-			FileUtils.copyURLToFile(req.url, f);
+			int connectionTimeout = AppConfig.INSTANCE.getIntProp(ConfigPropKey.HTTP_CONNECTION_TIMEOUT);
+			int readTimeout = AppConfig.INSTANCE.getIntProp(ConfigPropKey.HTTP_READ_TIMEOUT);
+			
+			FileUtils.copyURLToFile(req.url, f, connectionTimeout, readTimeout);
 			req.state = RequestState.COMPLETED;
 		} catch (IOException e) {
 			req.state = RequestState.ERROR;
